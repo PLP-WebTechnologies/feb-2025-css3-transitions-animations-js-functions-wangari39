@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      width: 300px;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h2 {
+      color: #333;
+      animation: bounce 2s infinite;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #thankYouMsg {
+      margin-top: 15px;
+      font-size: 1.1em;
+      color: #4CAF50;
+      display: none;
+      animation: slideUp 1s ease forwards;
+    }
+
+    /* CSS Animations */
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Feedback Form</h2>
+    <input type="text" id="name" placeholder="Your name">
+    <textarea id="feedback" placeholder="Your feedback" rows="4"></textarea>
+    <button onclick="submitFeedback()">Submit</button>
+    <div id="thankYouMsg">Thanks for your feedback!</div>
+  </div>
+
+  <script>
+    function submitFeedback() {
+      const name = document.getElementById("name").value.trim();
+      const feedback = document.getElementById("feedback").value.trim();
+      const message = document.getElementById("thankYouMsg");
+
+      if (name && feedback) {
+        localStorage.setItem("userName", name);
+        localStorage.setItem("userFeedback", feedback);
+
+        message.style.display = "block";
+        message.style.animation = "slideUp 1s ease forwards";
+
+        document.getElementById("name").value = '';
+        document.getElementById("feedback").value = '';
+      } else {
+        alert("Please fill in both fields.");
+      }
+    }
+  </script>
+
+</body>
+</html>
